@@ -1,0 +1,20 @@
+# Виртуальное окружение
+venv/
+
+# Кэш Python
+__pycache__/
+*.py[cod]
+
+# Логи
+*.log
+
+# Пользовательские данные (будут создаваться локально у каждого)
+frontend/user_data/
+
+# Системные файлы
+Thumbs.db
+.DS_Store
+
+# Файлы сборки Buildozer (позже)
+frontend/bin/
+frontend/.buildozer/
