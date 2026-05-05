@@ -1,0 +1,7 @@
+job_code,job_name,kcal_per_shift
+operator_light,Оператор ЛК,1800
+operator_medium,Оператор ЧПУ,2200
+operator_heavy,Слесарь,3000
+welder,Сварщик,3200
+packer,Упаковщик,1900
+engineer_office,Инженер,1500
