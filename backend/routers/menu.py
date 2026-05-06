@@ -1,7 +1,7 @@
 from fastapi import APIRouter, Depends, Header, HTTPException
 from sqlmodel import Session, select
 from database import get_session
-from models import User, Dish
+from models import Employee, Dish  # User → Employee
 from schemas import WeeklyMenu, DayMenu, Dish as DishSchema
 from ml_service import get_score
 from jose import jwt, JWTError
@@ -22,30 +22,25 @@ def get_current_user(token: str = Header(...), session: Session = Depends(get_se
     except JWTError:
         raise HTTPException(status_code=401, detail="Invalid token")
         
-    statement = select(User).where(User.username == username)
+    statement = select(Employee).where(Employee.username == username)  # User → Employee
     user = session.exec(statement).first()
     if user is None:
         raise HTTPException(status_code=401, detail="User not found")
     return user
 
 @router.get("/menu/weekly", response_model=WeeklyMenu)
-def get_weekly_menu(current_user: User = Depends(get_current_user), session: Session = Depends(get_session)):
-    # Получаем все блюда
+def get_weekly_menu(current_user: Employee = Depends(get_current_user), session: Session = Depends(get_session)):  # User → Employee
     dishes = session.exec(select(Dish)).all()
     
-    # Оцениваем каждое блюдо для текущего пользователя
     scored_dishes = []
     for dish in dishes:
         score = get_score(current_user, dish)
         scored_dishes.append((dish, score))
     
-    # Сортируем по убыванию релевантности
     scored_dishes.sort(key=lambda x: x[1], reverse=True)
     
-    # Берем топ-5 лучших блюд для демонстрации
     top_dishes = [d[0] for d in scored_dishes[:5]]
     
-    # Генерируем меню на неделю
     today = date.today()
     start_of_week = today - timedelta(days=today.weekday())
     weekdays = ["Понедельник", "Вторник", "Среда", "Четверг", "Пятница", "Суббота", "Воскресенье"]
@@ -58,21 +53,19 @@ def get_weekly_menu(current_user: User = Depends(get_current_user), session: Ses
         
         day_dishes_list = []
         if not is_weekend:
-            # В будни показываем топ блюд
             for d in top_dishes:
-                # Парсим теги в аллергены для фронтенда
                 try:
                     allergens = json.loads(d.tags)
                 except:
                     allergens = []
                     
                 dish_schema = DishSchema(
-                    dish_id=d.id,
+                    dish_id=d.dish_id,  # Используем dish_id
                     name=d.name,
                     category=d.category,
                     calories=d.calories,
-                    proteins=d.protein,
-                    fats=d.fat,
+                    proteins=d.proteins,  # Исправлено: proteins (не protein)
+                    fats=d.fats,  # Исправлено: fats (не fat)
                     carbs=d.carbs,
                     allergens=allergens
                 )
