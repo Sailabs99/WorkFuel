@@ -1,0 +1,43 @@
+#:import theme ui.theme
+#:import dp kivy.metrics.dp
+
+<ProfileScreen>:
+    canvas.before:
+        Color:
+            rgba: theme.GRAY_50
+        Rectangle:
+            pos: self.pos
+            size: self.size
+
+    BoxLayout:
+        orientation: "vertical"
+        spacing: 0
+
+        MDBoxLayout:
+            adaptive_height: True
+            md_bg_color: theme.WHITE
+            padding: [theme.PADDING_SCREEN, dp(8), theme.PADDING_SCREEN, dp(8)]
+            elevation: theme.ELEVATION_DEFAULT
+            spacing: dp(12)
+
+            MDFlatButton:
+                text: "Назад"
+                theme_text_color: "Primary"
+                on_release: root.go_back()
+
+            MDLabel:
+                text: "Профиль"
+                font_style: "H6"
+                theme_text_color: "Primary"
+                halign: "center"
+                size_hint_x: 1
+
+        ScrollView:
+            size_hint_y: 1
+            BoxLayout:
+                id: content_area
+                orientation: "vertical"
+                padding: theme.PADDING_SCREEN
+                spacing: theme.SPACING_ITEMS
+                size_hint_y: None
+                height: self.minimum_height

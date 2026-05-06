@@ -20,7 +20,7 @@ class WeekDayButton(MDCard):
         self.size_hint = (None, None)
         self.size = (dp(56), dp(56))
         self.radius = dp(12)
-        self.elevation = 4 if is_selected else 1
+        self.elevation = 0
         app = MDApp.get_running_app()
         self.md_bg_color = app.theme_cls.primary_color if is_selected else (0.9, 0.9, 0.9, 1)
         self.padding = "4dp"
@@ -34,20 +34,22 @@ class WeekDayButton(MDCard):
 
 
 class TopWeekBar(ScrollView):
-    """Горизонтальная панель для выбора дня недели."""
+    """Горизонтальная панель для выбора дня недели с центрированием содержимого."""
     def __init__(self, weekly_menu, current_day_index: int, on_day_selected, **kwargs):
         super().__init__(**kwargs)
         self.do_scroll_x = True
         self.do_scroll_y = False
-        self.bar_width = dp(56 * 7 + 5*6)
         self.size_hint_y = None
         self.height = dp(70)
 
-        box = MDBoxLayout(orientation='horizontal', spacing=dp(5), padding=dp(5))
         self.weekly_menu = weekly_menu
         self.current_index = current_day_index
         self.on_day_selected = on_day_selected
         self.buttons = []
+
+        # Горизонтальный контейнер для кнопок
+        self.box = MDBoxLayout(orientation='horizontal', spacing=dp(5), size_hint=(None, 1))
+        self.box.bind(minimum_width=self.box.setter('width'))
 
         app = MDApp.get_running_app()
         for i, day_menu in enumerate(weekly_menu.days):
@@ -58,9 +60,24 @@ class TopWeekBar(ScrollView):
             )
             btn.bind(on_release=self._create_day_callback(i))
             self.buttons.append(btn)
-            box.add_widget(btn)
+            self.box.add_widget(btn)
 
-        self.add_widget(box)
+        self.add_widget(self.box)
+
+        # Пересчитываем отступы при изменении ширины панели или контента
+        self.bind(width=self._update_padding)
+        self.box.bind(width=self._update_padding)
+
+    def _update_padding(self, *args):
+        """Центрируем контент, добавляя левый отступ, когда он уже панели."""
+        total_buttons_width = self.box.width
+        available = self.width
+        if total_buttons_width < available:
+            # центрируем – padding слева = половина свободного места
+            self.box.padding = [int((available - total_buttons_width) / 2), 0, 0, 0]
+        else:
+            # контент занимает больше – убираем дополнительный отступ
+            self.box.padding = [0, 0, 0, 0]
 
     def _create_day_callback(self, index):
         def callback(instance):
@@ -69,11 +86,9 @@ class TopWeekBar(ScrollView):
                 if i == index:
                     btn.md_bg_color = app.theme_cls.primary_color
                     btn.children[0].text_color = (1,1,1,1)
-                    btn.elevation = 4
                 else:
                     btn.md_bg_color = (0.9, 0.9, 0.9, 1)
                     btn.children[0].text_color = (0,0,0,1)
-                    btn.elevation = 1
             self.on_day_selected(index)
         return callback
 

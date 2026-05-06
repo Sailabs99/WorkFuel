@@ -1,0 +1,43 @@
+#:import theme ui.theme
+#:import dp kivy.metrics.dp
+
+<DayMenuScreen>:
+    canvas.before:
+        Color:
+            rgba: theme.GRAY_50
+        Rectangle:
+            pos: self.pos
+            size: self.size
+
+    BoxLayout:
+        orientation: "vertical"
+        spacing: 0
+
+        MDBoxLayout:
+            adaptive_height: True
+            md_bg_color: theme.WHITE
+            padding: [theme.PADDING_SCREEN, dp(8), theme.PADDING_SCREEN, dp(8)]
+            elevation: 0
+            spacing: dp(12)
+
+            MDLabel:
+                text: "Мой обед"
+                font_style: "H6"
+                theme_text_color: "Primary"
+                size_hint_x: 1
+                halign: "center"
+
+            MDFlatButton:
+                text: "Профиль"
+                theme_text_color: "Primary"
+                on_release: root.go_to_profile()
+
+        ScrollView:
+            size_hint_y: 1       # <-- важно: занимает всё доступное пространство
+            BoxLayout:
+                id: content_layout
+                orientation: "vertical"
+                spacing: theme.SPACING_ITEMS
+                padding: theme.PADDING_SCREEN
+                size_hint_y: None
+                height: self.minimum_height

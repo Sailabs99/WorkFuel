@@ -1,0 +1,60 @@
+#:import theme ui.theme
+#:import dp kivy.metrics.dp
+
+<LoginScreen>:
+    canvas.before:
+        Color:
+            rgba: theme.GRAY_50
+        Rectangle:
+            pos: self.pos
+            size: self.size
+
+    BoxLayout:
+        orientation: "vertical"
+        padding: theme.PADDING_SCREEN
+        spacing: theme.SPACING_ITEMS
+
+        MDLabel:
+            text: "Вход в систему"
+            font_style: "H4"
+            theme_text_color: "Primary"
+            halign: "center"
+
+        MDTextField:
+            id: employee_id
+            mode: "rectangle"
+            hint_text: "Табельный номер"
+            line_color_focus: theme.PRIMARY
+            line_color_normal: theme.GRAY_200
+            radius: [theme.RADIUS_LG]
+            fill_color_normal: theme.WHITE
+            hint_text_color: theme.GRAY_400
+            text_color: theme.GRAY_800
+            font_size: "16sp"
+            size_hint_x: 1
+            height: dp(52)
+
+        MDTextField:
+            id: password
+            mode: "rectangle"
+            hint_text: "Пароль"
+            password: True
+            line_color_focus: theme.PRIMARY
+            line_color_normal: theme.GRAY_200
+            radius: [theme.RADIUS_LG]
+            fill_color_normal: theme.WHITE
+            hint_text_color: theme.GRAY_400
+            text_color: theme.GRAY_800
+            font_size: "16sp"
+            size_hint_x: 1
+            height: dp(52)
+
+        MDRaisedButton:
+            text: "Войти"
+            md_bg_color: theme.PRIMARY
+            text_color: theme.WHITE
+            radius: [theme.RADIUS_XL]
+            font_size: "16sp"
+            size_hint_x: 1
+            height: dp(48)
+            on_release: root.login()

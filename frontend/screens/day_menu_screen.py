@@ -3,20 +3,19 @@
 """
 
 from kivymd.uix.screen import MDScreen
-from kivymd.uix.toolbar import MDTopAppBar
-from kivymd.uix.boxlayout import MDBoxLayout
-from kivymd.uix.scrollview import ScrollView
-from kivymd.uix.label import MDLabel
-from kivymd.uix.button import MDFlatButton
 from kivymd.uix.dialog import MDDialog
-from kivy.metrics import dp
 from kivy.clock import Clock
 from datetime import date
+from kivy.lang import Builder
+import os
 
 from services.data_manager import DataManager
 from ui.components.top_week_bar import TopWeekBar
 from ui.components.day_panel import DayPanel
 from utils.threading_helper import run_in_thread
+
+# Загружаем kv-стили
+Builder.load_file(os.path.join(os.path.dirname(__file__), "day_menu_screen.kv"))
 
 
 class DayMenuScreen(MDScreen):
@@ -25,21 +24,6 @@ class DayMenuScreen(MDScreen):
         self.data_manager = data_manager
         self.current_day_index = date.today().weekday()
         self.weekly_menu = None
-
-        self.layout = MDBoxLayout(orientation='vertical')
-
-        self.toolbar = MDTopAppBar(
-            title="Меню",
-            right_action_items=[
-                ["account-circle", lambda x: self.go_to_profile()],
-                ["refresh", lambda x: self.refresh_menu()]
-            ]
-        )
-        self.layout.add_widget(self.toolbar)
-
-        self.content_layout = MDBoxLayout(orientation='vertical')
-        self.layout.add_widget(self.content_layout)
-        self.add_widget(self.layout)
         self.bind(on_pre_enter=self.on_pre_enter)
 
     def on_pre_enter(self, *args):
@@ -67,24 +51,24 @@ class DayMenuScreen(MDScreen):
 
     def build_ui_for_day(self, day_index: int):
         self.current_day_index = day_index
-        self.content_layout.clear_widgets()
+        content = self.ids.content_layout  # используем id из kv
+        content.clear_widgets()
 
         if not self.weekly_menu:
             return
 
-        self.week_bar = TopWeekBar(
+        # Верхняя панель дней недели
+        week_bar = TopWeekBar(
             weekly_menu=self.weekly_menu,
             current_day_index=day_index,
             on_day_selected=self.on_day_selected
         )
-        self.content_layout.add_widget(self.week_bar)
+        content.add_widget(week_bar)
 
+        # Панель выбранного дня
         day_menu = self.weekly_menu.days[day_index]
         panel = DayPanel(day_menu=day_menu)
-
-        scroll = ScrollView()
-        scroll.add_widget(panel)
-        self.content_layout.add_widget(scroll)
+        content.add_widget(panel)
 
     def on_day_selected(self, index: int):
         self.build_ui_for_day(index)

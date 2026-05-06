@@ -1,10 +1,11 @@
 """
 Экран профиля сотрудника.
 """
+from kivy.metrics import dp
+
 
 import os
 from kivymd.uix.screen import MDScreen
-from kivymd.uix.toolbar import MDTopAppBar
 from kivymd.uix.label import MDLabel
 from kivymd.uix.button import MDRaisedButton, MDFlatButton
 from kivymd.uix.boxlayout import MDBoxLayout
@@ -12,38 +13,33 @@ from kivymd.uix.relativelayout import MDRelativeLayout
 from kivymd.uix.fitimage import FitImage
 from kivymd.uix.list import MDList, OneLineListItem
 from kivymd.uix.dialog import MDDialog
-from kivy.uix.modalview import ModalView
 from kivy.clock import Clock
 from plyer import filechooser
 
 from services.data_manager import DataManager
-from services.local_storage import get_avatar_path, save_avatar_path, delete_token, delete_profile
+from services.local_storage import get_avatar_path, save_avatar_path
 from utils.threading_helper import run_in_thread
+
+from kivy.lang import Builder
+
+from ui.theme import RADIUS_XL
+from kivy.metrics import dp
+
+# Загружаем kv-стили
+Builder.load_file(os.path.join(os.path.dirname(__file__), "profile_screen.kv"))
 
 
 class ProfileScreen(MDScreen):
     def __init__(self, data_manager: DataManager, **kwargs):
         super().__init__(**kwargs)
         self.data_manager = data_manager
-
-        self.layout = MDBoxLayout(orientation='vertical')
-
-        # Тулбар с кнопкой "Назад" и заголовком
-        self.toolbar = MDTopAppBar(
-            title="Профиль",
-            left_action_items=[["arrow-left", lambda x: self.go_back()]]
-        )
-        self.layout.add_widget(self.toolbar)
-
-        # Основной контент будет добавлен позже
-        self.content_area = MDBoxLayout(orientation='vertical', padding=20, spacing=20)
-        self.layout.add_widget(self.content_area)
-
-        self.add_widget(self.layout)
         self.bind(on_pre_enter=self.load_profile)
 
     def load_profile(self, *args):
-        self.content_area.clear_widgets()
+        # Очищаем динамическую часть (контейнер с id content_area)
+        content = self.ids.content_area
+        content.clear_widgets()
+
         profile = self.data_manager.load_cached_profile()
         if not profile:
             MDDialog(title="Ошибка", text="Профиль не найден, выполните вход заново",
@@ -58,11 +54,10 @@ class ProfileScreen(MDScreen):
                                      radius=[60], size_hint=(1,1))
         avatar_box.add_widget(self.avatar_image)
 
-        # Кнопка изменения фото
         change_btn = MDFlatButton(text="Сменить фото", pos_hint={'center_x': 0.5},
                                   on_release=self.change_avatar)
-        self.content_area.add_widget(avatar_box)
-        self.content_area.add_widget(change_btn)
+        content.add_widget(avatar_box)
+        content.add_widget(change_btn)
 
         # Информация о сотруднике
         info_list = MDList()
@@ -73,17 +68,22 @@ class ProfileScreen(MDScreen):
         ]
         for title, value in fields:
             info_list.add_widget(
-                OneLineListItem(text=f"{title}: {value}", divider='Inset')  # Исправлено
+                OneLineListItem(text=f"{title}: {value}")
             )
-        self.content_area.add_widget(info_list)
+        content.add_widget(info_list)
 
         # Кнопка "Выйти"
-        logout_btn = MDRaisedButton(text="Выйти", size_hint=(1, None), height=50,
-                                    on_release=self.logout)
-        self.content_area.add_widget(logout_btn)
+        logout_btn = MDRaisedButton(
+            text="Выйти",
+            size_hint=(1, None),
+            height=dp(50),
+            elevation=0,  # без тени
+            radius=[RADIUS_XL, RADIUS_XL, RADIUS_XL, RADIUS_XL],  # 4 одинаковых значения
+            on_release=self.logout
+        )
+        content.add_widget(logout_btn)
 
     def change_avatar(self, instance):
-        """Открывает выбор файла изображения."""
         try:
             filechooser.open_file(title="Выберите аватар",
                                   filters=["*.png", "*.jpg", "*.jpeg"],
@@ -99,13 +99,20 @@ class ProfileScreen(MDScreen):
             self.avatar_image.source = path
 
     def logout(self, instance):
-        """Выход из аккаунта."""
         dialog = MDDialog(
             title="Выход",
             text="Вы уверены, что хотите выйти?",
             buttons=[
-                MDFlatButton(text="Отмена", on_release=lambda x: dialog.dismiss()),
-                MDRaisedButton(text="Выйти", on_release=lambda x: self._confirm_logout(dialog))
+                MDFlatButton(
+                    text="Отмена",
+                    on_release=lambda x: dialog.dismiss()
+                ),
+                MDRaisedButton(
+                    text="Выйти",
+                    elevation=0,
+                    radius=[RADIUS_XL, RADIUS_XL, RADIUS_XL, RADIUS_XL],
+                    on_release=lambda x: self._confirm_logout(dialog)
+                )
             ]
         )
         dialog.open()

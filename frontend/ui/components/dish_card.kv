@@ -1,0 +1,47 @@
+#:import theme ui.theme
+#:import dp kivy.metrics.dp
+
+<DishCard>:
+    radius: [theme.RADIUS_XL]
+    padding: dp(12)                    # увеличенный внутренний отступ
+    md_bg_color: theme.WHITE
+    orientation: "vertical"
+    spacing: dp(4)
+    size_hint_y: None
+    height: self.minimum_height
+    elevation: 0
+
+    canvas.after:
+        Color:
+            rgba: theme.GRAY_200       # светло-серая рамка
+        Line:
+            rounded_rectangle: self.x + dp(1), self.y + dp(1), self.width - dp(2), self.height - dp(2), theme.RADIUS_XL
+            width: dp(1)
+
+    # Верхняя строка: название и калории
+    MDBoxLayout:
+        adaptive_height: True
+        spacing: dp(8)
+
+        MDLabel:
+            text: root.dish.name
+            font_style: "Subtitle1"
+            theme_text_color: "Primary"
+            bold: True
+            shorten: True
+            size_hint_x: 0.7
+
+        MDLabel:
+            text: f"{root.dish.calories} ккал"
+            font_style: "Body2"
+            text_color: theme.GRAY_800
+            halign: "right"
+            size_hint_x: 0.3
+
+    # Нижняя строка: КБЖУ с разделителями
+    MDLabel:
+        text: f"Б {root.dish.proteins:.0f} | Ж {root.dish.fats:.0f} | У {root.dish.carbs:.0f} | Ккал {root.dish.calories}"
+        font_style: "Caption"
+        text_color: theme.GRAY_800
+        halign: "left"
+        size_hint_x: 1
