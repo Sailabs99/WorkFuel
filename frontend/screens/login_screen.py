@@ -9,6 +9,7 @@ from kivymd.uix.label import MDLabel
 from kivymd.uix.boxlayout import MDBoxLayout
 from kivymd.uix.snackbar import Snackbar
 from kivy.clock import Clock
+from utils.snackbar_helper import show_snackbar
 
 from services.data_manager import DataManager
 from utils.threading_helper import run_in_thread
@@ -68,15 +69,15 @@ class LoginScreen(MDScreen):
         password = self.password_field.text.strip()
 
         if not username or not password:
-            MDSnackbar(text='Введите логин и пароль').open()
+            show_snackbar(f'Введите логин и пароль')
             return
 
         def on_success(profile):
-            MDSnackbar(text=f'Добро пожаловать, {profile.full_name.split()[0]}!').open()
+            show_snackbar(f'Добро пожаловать, {profile.full_name.split()[0]}!')
             Clock.schedule_once(lambda dt: setattr(self.manager, 'current', 'day_menu'), 0.5)
 
         def on_error(error_msg):
-            MDSnackbar(text=f'Ошибка: {error_msg}').open()
+            show_snackbar(f'Ошибка: {error_msg}')
 
         self._async_call(lambda: self.data_manager.authenticate(username, password),
                          on_success, on_error)

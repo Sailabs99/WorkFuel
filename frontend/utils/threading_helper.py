@@ -19,13 +19,9 @@ def run_in_thread(callback_on_result, callback_on_error=None):
                 try:
                     result = func(*args, **kwargs)
                     # Планируем вызов колбэка в главном потоке
-                    Clock.schedule_once(lambda dt: callback_on_result(result))
+                    Clock.schedule_once(lambda dt, res=result: callback_on_result(res))
                 except Exception as e:
-                    if callback_on_error:
-                        Clock.schedule_once(lambda dt: callback_on_error(str(e)))
-                    else:
-                        # Если колбэк ошибки не задан, пробрасываем исключение в главный поток
-                        Clock.schedule_once(lambda dt: (_ for _ in ()).throw(e))
+                    Clock.schedule_once(lambda dt, err_msg=str(e): callback_on_error(err_msg))
             threading.Thread(target=target, daemon=True).start()
         return wrapper
     return decorator
