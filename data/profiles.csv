@@ -1,0 +1,201 @@
+emp_id,age,gender,height_cm,weight_kg,job_code,hard_exclusions,soft_dislikes,preferences,kcal_per_shift,bmr,meal_target_kcal
+EMP_001,33,male,162.3,104.6,packer,[],"[""gluten"", ""fish""]","[""fiber""]",1900,1900.375,1330.13125
+EMP_002,20,male,166.6,92.8,operator_medium,"[""gluten""]",[],"[""hot"", ""veg""]",2200,1874.25,1425.9875
+EMP_003,33,female,152.4,97.9,welder,[],"[""fish""]","[""diet"", ""veg""]",3200,1605.5,1681.925
+EMP_004,51,female,168.2,72.9,engineer_office,[],"[""mushroom"", ""fish""]",[],1500,1364.25,1002.4875
+EMP_005,47,female,157.3,51.0,operator_heavy,[],"[""spicy"", ""nuts""]","[""low_carb""]",3000,1097.125,1433.9937499999999
+EMP_006,39,male,159.8,99.9,operator_light,[],"[""gluten""]","[""veg"", ""hot""]",1800,1807.75,1262.7124999999999
+EMP_007,28,male,176.6,64.2,packer,"[""gluten""]",[],"[""hot"", ""fiber""]",1900,1610.75,1228.7624999999998
+EMP_008,23,male,180.9,50.0,packer,[],[],"[""veg""]",1900,1520.625,1197.21875
+EMP_009,28,female,156.3,84.8,operator_light,[],"[""pork""]","[""diet""]",1800,1523.875,1163.3562499999998
+EMP_010,40,male,185.5,66.6,engineer_office,"[""fish""]","[""mushroom"", ""spicy""]",[],1500,1630.375,1095.63125
+EMP_011,20,male,187.4,74.4,welder,[],"[""gluten""]","[""veg""]",3200,1820.25,1757.0874999999999
+EMP_012,54,female,172.4,113.0,operator_heavy,[],"[""mushroom""]","[""high_protein""]",3000,1776.5,1671.7749999999999
+EMP_013,29,female,163.7,98.4,packer,[],"[""lactose"", ""spicy""]","[""diet""]",1900,1701.125,1260.39375
+EMP_014,42,female,158.8,95.2,operator_light,[],[],[],1800,1573.5,1180.725
+EMP_015,52,male,177.1,90.1,welder,[],"[""mushroom"", ""pork""]","[""diet"", ""hot""]",3200,1752.875,1733.50625
+EMP_016,32,male,175.7,111.4,operator_light,"[""pork""]","[""spicy""]",[],1800,2057.125,1349.9937499999999
+EMP_017,47,male,157.8,77.8,engineer_office,"[""mushroom""]","[""pork""]","[""veg""]",1500,1534.25,1061.9875
+EMP_018,21,male,169.4,58.9,operator_light,"[""lactose""]","[""mushroom""]","[""high_protein""]",1800,1547.75,1171.7124999999999
+EMP_019,35,male,165.0,62.9,engineer_office,[],"[""mushroom""]",[],1500,1490.25,1046.5874999999999
+EMP_020,21,female,158.9,103.0,operator_light,[],"[""gluten""]",[],1800,1757.125,1244.9937499999999
+EMP_021,33,female,173.7,112.1,welder,[],[],"[""high_protein""]",3200,1880.625,1778.21875
+EMP_022,39,male,180.0,107.4,operator_medium,[],"[""nuts""]","[""diet""]",2200,2009.0,1473.1499999999999
+EMP_023,48,male,174.8,98.5,operator_medium,[],[],"[""fiber"", ""hot""]",2200,1842.5,1414.875
+EMP_024,31,female,164.0,66.7,packer,[],"[""lactose""]",[],1900,1376.0,1146.6
+EMP_025,53,male,193.0,90.1,packer,[],[],"[""hot"", ""low_carb""]",1900,1847.25,1311.5375
+EMP_026,39,male,159.7,60.0,operator_medium,"[""mushroom""]",[],[],2200,1408.125,1262.84375
+EMP_027,33,male,190.2,66.6,operator_light,[],"[""pork""]","[""low_carb""]",1800,1694.75,1223.1625
+EMP_028,40,female,153.0,58.2,operator_light,[],"[""fish"", ""lactose""]",[],1800,1177.25,1042.0375
+EMP_029,39,male,190.6,86.9,operator_heavy,"[""mushroom""]","[""pork"", ""fish""]","[""fiber"", ""hot""]",3000,1870.25,1704.5874999999999
+EMP_030,22,female,161.4,93.4,operator_medium,"[""gluten""]",[],[],2200,1671.75,1355.1125
+EMP_031,29,male,191.4,107.6,operator_medium,[],"[""fish"", ""pork""]","[""hot"", ""low_carb""]",2200,2132.25,1516.2875
+EMP_032,33,male,188.7,108.7,operator_medium,[],[],[],2200,2106.375,1507.2312499999998
+EMP_033,28,male,160.2,116.8,packer,"[""spicy""]","[""gluten"", ""fish""]","[""fiber"", ""hot""]",1900,2034.25,1376.9875
+EMP_034,53,female,171.9,78.2,packer,[],"[""fish""]","[""fiber"", ""hot""]",1900,1430.375,1165.63125
+EMP_035,35,male,170.9,93.5,operator_heavy,[],[],"[""high_protein""]",3000,1833.125,1691.59375
+EMP_036,38,male,160.1,60.6,engineer_office,"[""lactose""]",[],[],1500,1421.625,1022.5687499999999
+EMP_037,23,male,176.4,74.9,engineer_office,"[""spicy""]","[""lactose""]","[""high_protein""]",1500,1741.5,1134.5249999999999
+EMP_038,26,male,176.5,114.7,engineer_office,"[""nuts""]","[""pork"", ""lactose""]","[""diet""]",1500,2125.125,1268.7937499999998
+EMP_039,29,male,162.3,89.5,operator_light,[],[],"[""fiber"", ""hot""]",1800,1769.375,1249.28125
+EMP_040,24,male,168.5,113.0,operator_medium,[],"[""gluten""]","[""high_protein""]",2200,2068.125,1493.84375
+EMP_041,20,male,194.3,57.8,operator_medium,"[""gluten""]",[],"[""low_carb"", ""hot""]",2200,1697.375,1364.08125
+EMP_042,27,female,158.1,79.8,operator_light,"[""spicy""]","[""lactose""]","[""veg"", ""fiber""]",1800,1490.125,1151.5437499999998
+EMP_043,22,female,155.0,97.9,welder,[],"[""pork"", ""nuts""]","[""high_protein""]",3200,1676.75,1706.8625
+EMP_044,27,male,157.7,101.9,engineer_office,"[""pork""]","[""lactose""]","[""veg""]",1500,1874.625,1181.1187499999999
+EMP_045,33,female,161.3,100.0,operator_heavy,[],"[""mushroom"", ""gluten""]","[""diet"", ""high_protein""]",3000,1682.125,1638.7437499999999
+EMP_046,44,female,169.9,93.4,welder,"[""mushroom""]",[],"[""low_carb""]",3200,1614.875,1685.20625
+EMP_047,31,female,163.4,76.5,packer,"[""nuts""]",[],"[""diet"", ""fiber""]",1900,1470.25,1179.5874999999999
+EMP_048,31,female,160.0,82.3,engineer_office,[],[],[],1500,1507.0,1052.45
+EMP_049,22,male,184.5,115.4,engineer_office,[],"[""pork""]","[""veg"", ""high_protein""]",1500,2202.125,1295.7437499999999
+EMP_050,48,male,179.1,58.0,welder,[],"[""lactose""]","[""veg""]",3200,1464.375,1632.53125
+EMP_051,30,male,178.2,94.3,welder,"[""lactose""]","[""lactose""]",[],3200,1911.75,1789.1125
+EMP_052,27,male,180.0,76.4,operator_heavy,"[""nuts""]","[""fish""]","[""high_protein"", ""veg""]",3000,1759.0,1665.6499999999999
+EMP_053,53,female,156.8,112.8,operator_medium,"[""mushroom""]",[],"[""high_protein""]",2200,1682.0,1358.6999999999998
+EMP_054,39,female,152.5,67.0,engineer_office,"[""nuts""]",[],[],1500,1267.125,968.49375
+EMP_055,44,male,187.7,73.9,operator_medium,[],"[""pork""]","[""veg""]",2200,1697.125,1363.9937499999999
+EMP_056,39,male,190.8,106.0,operator_light,"[""nuts""]",[],[],1800,2062.5,1351.875
+EMP_057,48,female,152.9,90.4,engineer_office,"[""mushroom""]","[""mushroom"", ""pork""]","[""hot""]",1500,1458.625,1035.51875
+EMP_058,37,female,172.9,79.3,welder,"[""fish""]",[],[],3200,1527.625,1654.6687499999998
+EMP_059,30,male,193.0,77.8,engineer_office,"[""mushroom""]","[""spicy"", ""mushroom""]",[],1500,1839.25,1168.7375
+EMP_060,23,male,169.1,78.9,packer,[],"[""spicy"", ""gluten""]","[""fiber"", ""high_protein""]",1900,1735.875,1272.5562499999999
+EMP_061,44,male,162.4,87.9,operator_heavy,"[""pork""]","[""mushroom""]","[""fiber""]",3000,1679.0,1637.6499999999999
+EMP_062,44,male,195.0,88.9,engineer_office,"[""lactose""]","[""gluten""]","[""low_carb"", ""diet""]",1500,1892.75,1187.4624999999999
+EMP_063,21,male,169.6,89.2,packer,"[""mushroom""]","[""fish"", ""spicy""]",[],1900,1852.0,1313.1999999999998
+EMP_064,50,female,150.6,110.9,engineer_office,[],"[""nuts"", ""fish""]","[""high_protein""]",1500,1639.25,1098.7375
+EMP_065,46,male,168.5,86.6,operator_light,"[""nuts""]","[""lactose""]","[""low_carb""]",1800,1694.125,1222.94375
+EMP_066,47,male,158.6,79.2,engineer_office,"[""pork""]","[""nuts"", ""lactose""]","[""fiber""]",1500,1553.25,1068.6375
+EMP_067,26,male,188.0,106.1,engineer_office,[],[],[],1500,2111.0,1263.85
+EMP_068,46,male,178.7,90.6,operator_medium,[],"[""spicy"", ""fish""]",[],2200,1797.875,1399.25625
+EMP_069,28,female,156.5,100.6,operator_medium,"[""fish""]",[],"[""diet""]",2200,1683.125,1359.09375
+EMP_070,43,female,164.1,68.7,engineer_office,"[""spicy""]",[],"[""high_protein"", ""hot""]",1500,1336.625,992.8187499999999
+EMP_071,53,male,156.2,107.8,operator_medium,"[""gluten""]",[],"[""low_carb"", ""high_protein""]",2200,1794.25,1397.9875
+EMP_072,42,female,170.5,59.0,operator_heavy,"[""fish""]","[""gluten"", ""fish""]","[""veg"", ""hot""]",3000,1284.625,1499.6187499999999
+EMP_073,36,female,165.5,53.2,operator_medium,"[""lactose""]",[],"[""diet"", ""low_carb""]",2200,1225.375,1198.88125
+EMP_074,25,female,174.9,79.8,packer,[],"[""lactose""]","[""high_protein""]",1900,1605.125,1226.7937499999998
+EMP_075,34,male,193.6,103.2,packer,[],"[""mushroom""]","[""high_protein"", ""veg""]",1900,2077.0,1391.9499999999998
+EMP_076,25,male,188.8,103.3,operator_heavy,[],"[""fish""]",[],3000,2093.0,1782.55
+EMP_077,35,female,161.4,50.8,operator_medium,"[""nuts""]","[""lactose""]",[],2200,1180.75,1183.2624999999998
+EMP_078,47,female,158.2,86.2,operator_light,[],"[""gluten"", ""fish""]","[""low_carb"", ""hot""]",1800,1454.75,1139.1625
+EMP_079,42,male,190.8,91.6,operator_light,[],"[""lactose""]","[""hot""]",1800,1903.5,1296.225
+EMP_080,38,female,161.0,100.7,welder,[],"[""lactose"", ""fish""]",[],3200,1662.25,1701.7875
+EMP_081,42,male,194.9,118.2,operator_heavy,"[""spicy""]","[""fish"", ""spicy""]","[""veg"", ""fiber""]",3000,2195.125,1818.2937499999998
+EMP_082,45,female,174.7,52.8,operator_light,[],"[""gluten""]","[""fiber"", ""low_carb""]",1800,1233.875,1061.85625
+EMP_083,33,female,165.8,101.3,operator_heavy,"[""gluten""]","[""pork""]","[""hot""]",3000,1723.25,1653.1374999999998
+EMP_084,38,male,181.5,56.7,operator_light,[],[],"[""diet"", ""low_carb""]",1800,1516.375,1160.7312499999998
+EMP_085,31,male,168.5,108.0,operator_light,[],"[""lactose""]",[],1800,1983.125,1324.09375
+EMP_086,48,female,171.6,89.1,operator_heavy,[],"[""pork""]","[""low_carb"", ""high_protein""]",3000,1562.5,1596.875
+EMP_087,44,female,174.7,117.6,operator_heavy,"[""spicy""]","[""gluten"", ""pork""]","[""diet"", ""veg""]",3000,1886.875,1710.40625
+EMP_088,45,female,174.2,56.6,packer,"[""nuts""]","[""nuts""]","[""hot"", ""high_protein""]",1900,1268.75,1109.0625
+EMP_089,52,male,163.6,96.1,packer,"[""mushroom""]","[""fish""]",[],1900,1728.5,1269.975
+EMP_090,23,female,160.1,72.9,engineer_office,[],"[""nuts"", ""mushroom""]","[""low_carb"", ""high_protein""]",1500,1453.625,1033.76875
+EMP_091,41,male,182.8,77.2,operator_light,[],"[""nuts"", ""gluten""]","[""diet"", ""veg""]",1800,1714.5,1230.0749999999998
+EMP_092,51,male,168.6,76.6,operator_medium,"[""gluten""]","[""spicy"", ""gluten""]",[],2200,1569.75,1319.4125
+EMP_093,51,male,181.2,76.6,welder,[],[],"[""diet"", ""veg""]",3200,1648.5,1696.975
+EMP_094,29,female,170.6,86.6,welder,"[""fish""]","[""fish""]","[""diet"", ""low_carb""]",3200,1626.25,1689.1875
+EMP_095,38,female,155.7,64.8,operator_medium,"[""fish""]","[""gluten"", ""nuts""]","[""hot"", ""low_carb""]",2200,1270.125,1214.5437499999998
+EMP_096,25,male,178.5,61.8,operator_heavy,"[""pork""]",[],[],3000,1613.625,1614.76875
+EMP_097,24,female,153.4,98.7,operator_heavy,"[""lactose""]","[""gluten""]","[""high_protein"", ""veg""]",3000,1664.75,1632.6625
+EMP_098,40,male,167.9,65.9,operator_light,[],[],"[""fiber""]",1800,1513.375,1159.6812499999999
+EMP_099,26,female,174.9,96.3,operator_light,[],"[""lactose""]",[],1800,1765.125,1247.7937499999998
+EMP_100,43,female,161.9,76.8,welder,[],"[""gluten""]",[],3200,1403.875,1611.3562499999998
+EMP_101,21,male,164.1,73.9,operator_light,[],"[""fish"", ""gluten""]","[""diet""]",1800,1664.625,1212.6187499999999
+EMP_102,49,female,162.5,77.8,engineer_office,"[""gluten""]","[""lactose"", ""mushroom""]","[""diet""]",1500,1387.625,1010.6687499999999
+EMP_103,54,female,173.3,90.3,packer,"[""spicy""]",[],[],1900,1555.125,1209.2937499999998
+EMP_104,37,male,193.5,88.5,welder,[],"[""gluten"", ""nuts""]","[""low_carb"", ""high_protein""]",3200,1914.375,1790.03125
+EMP_105,36,female,162.1,102.8,operator_light,[],"[""spicy""]",[],1800,1700.125,1225.0437499999998
+EMP_106,42,female,160.7,59.1,welder,[],"[""fish""]","[""low_carb"", ""hot""]",3200,1224.375,1548.53125
+EMP_107,29,female,167.0,63.3,packer,[],[],[],1900,1370.75,1144.7624999999998
+EMP_108,29,male,174.5,60.5,welder,"[""spicy""]",[],[],3200,1555.625,1664.46875
+EMP_109,35,male,166.2,115.1,welder,"[""gluten""]","[""spicy"", ""lactose""]",[],3200,2019.75,1826.9125
+EMP_110,43,male,156.5,102.2,operator_light,[],"[""lactose""]","[""diet"", ""high_protein""]",1800,1790.125,1256.5437499999998
+EMP_111,23,female,170.8,54.8,operator_medium,"[""lactose""]","[""pork""]","[""veg""]",2200,1339.5,1238.8249999999998
+EMP_112,21,female,158.1,58.8,operator_heavy,"[""pork""]","[""nuts""]",[],3000,1310.125,1508.5437499999998
+EMP_113,25,female,156.0,58.5,operator_heavy,"[""mushroom""]","[""mushroom"", ""spicy""]",[],3000,1274.0,1495.8999999999999
+EMP_114,39,male,181.2,62.4,engineer_office,"[""nuts""]","[""mushroom""]","[""fiber"", ""hot""]",1500,1566.5,1073.2749999999999
+EMP_115,46,male,175.3,70.8,operator_heavy,[],[],[],3000,1578.625,1602.51875
+EMP_116,50,female,155.1,88.9,engineer_office,[],"[""fish""]","[""veg""]",1500,1447.375,1031.58125
+EMP_117,31,male,188.7,82.9,operator_heavy,[],"[""nuts""]","[""diet"", ""veg""]",3000,1858.375,1700.4312499999999
+EMP_118,26,male,158.7,91.2,welder,[],"[""gluten""]","[""hot"", ""low_carb""]",3200,1778.875,1742.6062499999998
+EMP_119,47,female,155.2,107.8,operator_heavy,"[""mushroom""]","[""lactose"", ""mushroom""]","[""hot"", ""veg""]",3000,1652.0,1628.1999999999998
+EMP_120,34,female,162.4,62.5,engineer_office,[],[],[],1500,1309.0,983.15
+EMP_121,29,male,192.2,104.8,operator_heavy,"[""spicy""]",[],"[""hot""]",3000,2109.25,1788.2375
+EMP_122,37,male,186.2,50.5,operator_light,"[""lactose""]",[],"[""diet"", ""fiber""]",1800,1488.75,1151.0625
+EMP_123,32,male,173.0,104.4,welder,[],"[""mushroom"", ""fish""]","[""diet"", ""hot""]",3200,1970.25,1809.5874999999999
+EMP_124,24,female,173.4,53.7,welder,"[""fish""]",[],"[""high_protein"", ""veg""]",3200,1339.75,1588.9125
+EMP_125,23,female,168.0,79.3,operator_light,[],"[""nuts""]",[],1800,1567.0,1178.4499999999998
+EMP_126,49,female,154.1,116.2,operator_light,"[""pork""]","[""gluten"", ""nuts""]","[""veg"", ""fiber""]",1800,1719.125,1231.69375
+EMP_127,46,female,163.0,64.3,packer,[],[],[],1900,1270.75,1109.7624999999998
+EMP_128,37,female,159.3,81.6,operator_heavy,"[""gluten""]","[""lactose""]","[""fiber"", ""veg""]",3000,1465.625,1562.96875
+EMP_129,25,female,171.4,113.4,operator_medium,[],[],"[""hot""]",2200,1919.25,1441.7375
+EMP_130,45,male,193.7,79.2,packer,[],"[""lactose"", ""pork""]",[],1900,1782.625,1288.9187499999998
+EMP_131,45,male,168.5,70.8,engineer_office,"[""lactose""]","[""fish""]","[""diet""]",1500,1541.125,1064.39375
+EMP_132,28,female,170.6,57.0,packer,[],"[""pork""]","[""hot"", ""high_protein""]",1900,1335.25,1132.3374999999999
+EMP_133,23,male,182.5,54.9,engineer_office,[],"[""mushroom"", ""spicy""]","[""high_protein"", ""fiber""]",1500,1579.625,1077.8687499999999
+EMP_134,42,female,172.6,66.3,operator_light,[],"[""gluten"", ""spicy""]","[""veg""]",1800,1370.75,1109.7624999999998
+EMP_135,34,male,159.4,79.6,operator_light,"[""pork""]","[""nuts"", ""mushroom""]","[""high_protein""]",1800,1627.25,1199.5375
+EMP_136,29,male,173.0,65.3,packer,[],[],"[""hot""]",1900,1594.25,1222.9875
+EMP_137,50,female,166.7,91.5,operator_light,"[""mushroom""]","[""spicy"", ""pork""]",[],1800,1545.875,1171.0562499999999
+EMP_138,23,male,156.3,110.8,operator_medium,"[""fish""]","[""mushroom"", ""spicy""]",[],2200,1974.875,1461.20625
+EMP_139,28,male,160.3,66.4,welder,[],"[""pork"", ""fish""]","[""diet""]",3200,1530.875,1655.8062499999999
+EMP_140,36,male,168.3,83.7,engineer_office,[],[],"[""low_carb"", ""veg""]",1500,1713.875,1124.8562499999998
+EMP_141,30,female,156.9,107.2,operator_light,[],[],[],1800,1741.625,1239.56875
+EMP_142,50,male,183.6,92.6,operator_light,[],"[""lactose""]","[""diet"", ""veg""]",1800,1828.5,1269.975
+EMP_143,33,male,181.5,56.5,welder,"[""fish""]","[""pork"", ""fish""]","[""diet"", ""fiber""]",3200,1539.375,1658.78125
+EMP_144,24,male,179.5,111.2,welder,"[""nuts""]","[""pork""]",[],3200,2118.875,1861.6062499999998
+EMP_145,39,male,173.7,107.2,engineer_office,"[""pork""]","[""nuts"", ""fish""]","[""high_protein"", ""diet""]",1500,1967.625,1213.6687499999998
+EMP_146,35,female,172.2,50.9,operator_heavy,[],[],"[""fiber"", ""hot""]",3000,1249.25,1487.2375
+EMP_147,33,male,168.6,55.0,engineer_office,[],"[""fish""]","[""low_carb""]",1500,1443.75,1030.3125
+EMP_148,23,female,150.8,77.2,operator_medium,[],"[""fish""]",[],2200,1438.5,1273.475
+EMP_149,23,male,193.4,77.3,packer,"[""lactose""]",[],"[""hot"", ""veg""]",1900,1871.75,1320.1125
+EMP_150,26,male,168.7,68.9,welder,[],[],[],3200,1618.375,1686.4312499999999
+EMP_151,47,male,163.1,77.7,welder,[],"[""pork"", ""nuts""]","[""high_protein""]",3200,1566.375,1668.2312499999998
+EMP_152,43,male,190.1,116.1,operator_light,[],"[""mushroom"", ""spicy""]","[""high_protein"", ""hot""]",1800,2139.125,1378.69375
+EMP_153,40,male,190.8,81.9,welder,[],[],"[""high_protein""]",3200,1816.5,1755.7749999999999
+EMP_154,41,male,184.4,103.4,engineer_office,[],"[""mushroom""]","[""fiber""]",1500,1986.5,1220.2749999999999
+EMP_155,54,female,157.4,51.0,operator_light,"[""lactose""]",[],"[""fiber"", ""veg""]",1800,1062.75,1001.9625
+EMP_156,44,male,157.6,74.4,operator_heavy,"[""fish""]",[],"[""diet""]",3000,1514.0,1579.8999999999999
+EMP_157,25,female,160.1,70.7,welder,"[""pork""]",[],[],3200,1421.625,1617.56875
+EMP_158,46,male,190.5,85.2,engineer_office,"[""gluten""]","[""spicy""]","[""diet""]",1500,1817.625,1161.1687499999998
+EMP_159,29,male,161.3,111.7,operator_medium,[],"[""nuts"", ""fish""]","[""hot""]",2200,1985.125,1464.7937499999998
+EMP_160,20,male,192.6,55.8,welder,[],"[""spicy""]",[],3200,1666.75,1703.3625
+EMP_161,24,male,174.8,77.1,operator_heavy,[],[],"[""high_protein""]",3000,1748.5,1661.975
+EMP_162,42,female,152.6,84.9,welder,"[""mushroom""]",[],"[""veg"", ""low_carb""]",3200,1431.75,1621.1125
+EMP_163,45,female,155.4,97.4,packer,[],"[""gluten""]",[],1900,1559.25,1210.7375
+EMP_164,43,male,159.5,86.1,welder,[],"[""fish""]",[],3200,1647.875,1696.75625
+EMP_165,20,male,190.1,52.9,operator_medium,"[""lactose""]","[""nuts""]","[""veg""]",2200,1622.125,1337.7437499999999
+EMP_166,20,male,168.7,101.7,welder,[],"[""lactose"", ""spicy""]",[],3200,1976.375,1811.7312499999998
+EMP_167,27,female,165.1,83.1,welder,[],[],[],3200,1566.875,1668.40625
+EMP_168,51,male,186.3,90.5,operator_heavy,[],[],[],3000,1819.375,1686.78125
+EMP_169,20,female,155.8,53.1,operator_light,"[""pork""]",[],[],1800,1243.75,1065.3125
+EMP_170,36,male,157.0,109.1,operator_heavy,[],"[""mushroom"", ""nuts""]","[""low_carb"", ""fiber""]",3000,1897.25,1714.0375
+EMP_171,22,female,150.3,51.0,welder,[],"[""pork"", ""nuts""]","[""high_protein""]",3200,1178.375,1532.4312499999999
+EMP_172,25,female,169.1,109.9,welder,[],"[""fish"", ""gluten""]","[""high_protein"", ""low_carb""]",3200,1869.875,1774.45625
+EMP_173,36,male,155.0,113.1,engineer_office,"[""pork""]",[],"[""hot"", ""high_protein""]",1500,1924.75,1198.6625
+EMP_174,32,female,174.8,77.0,packer,[],"[""nuts""]","[""veg"", ""low_carb""]",1900,1541.5,1204.5249999999999
+EMP_175,26,female,167.0,65.7,welder,[],"[""nuts"", ""fish""]","[""diet""]",3200,1409.75,1613.4125
+EMP_176,27,male,165.2,70.7,engineer_office,"[""spicy""]","[""mushroom"", ""lactose""]","[""veg"", ""fiber""]",1500,1609.5,1088.3249999999998
+EMP_177,32,female,153.8,111.3,packer,"[""nuts""]","[""pork""]",[],1900,1753.25,1278.6374999999998
+EMP_178,30,male,172.5,111.8,engineer_office,[],"[""nuts"", ""pork""]","[""high_protein""]",1500,2051.125,1242.89375
+EMP_179,26,female,158.4,120.0,welder,[],"[""gluten"", ""spicy""]","[""low_carb"", ""high_protein""]",3200,1899.0,1784.6499999999999
+EMP_180,21,male,169.5,116.4,operator_light,[],"[""spicy"", ""nuts""]","[""hot"", ""high_protein""]",1800,2123.375,1373.1812499999999
+EMP_181,45,female,158.6,52.2,operator_light,[],[],"[""low_carb"", ""hot""]",1800,1127.25,1024.5375
+EMP_182,37,female,168.4,76.9,operator_heavy,[],[],[],3000,1475.5,1566.425
+EMP_183,37,male,174.3,58.3,engineer_office,[],"[""fish"", ""gluten""]",[],1500,1492.375,1047.33125
+EMP_184,41,female,166.9,53.6,operator_light,"[""pork""]",[],"[""hot""]",1800,1213.125,1054.59375
+EMP_185,31,female,158.3,54.0,welder,[],[],[],3200,1213.375,1544.6812499999999
+EMP_186,23,female,163.9,63.3,welder,[],"[""spicy"", ""pork""]","[""hot""]",3200,1381.375,1603.4812499999998
+EMP_187,26,male,193.1,70.8,engineer_office,"[""gluten""]","[""pork""]","[""veg""]",1500,1789.875,1151.45625
+EMP_188,38,male,178.9,110.6,operator_light,[],"[""gluten""]","[""high_protein""]",1800,2039.125,1343.69375
+EMP_189,33,male,165.1,81.5,operator_light,"[""mushroom""]","[""nuts""]","[""high_protein""]",1800,1686.875,1220.40625
+EMP_190,48,male,165.3,80.4,operator_light,[],[],[],1800,1602.125,1190.7437499999999
+EMP_191,22,female,151.6,82.1,operator_heavy,"[""mushroom""]","[""mushroom"", ""gluten""]",[],3000,1497.5,1574.125
+EMP_192,28,male,175.9,54.8,operator_medium,[],[],"[""diet""]",2200,1512.375,1299.33125
+EMP_193,49,female,161.1,95.5,packer,[],"[""mushroom"", ""fish""]","[""low_carb"", ""diet""]",1900,1555.875,1209.5562499999999
+EMP_194,46,female,150.3,78.6,engineer_office,"[""pork""]",[],[],1500,1334.375,992.0312499999999
+EMP_195,39,male,169.3,74.8,welder,"[""nuts""]",[],[],3200,1616.125,1685.64375
+EMP_196,26,female,169.9,111.9,welder,[],[],"[""low_carb"", ""high_protein""]",3200,1889.875,1781.45625
+EMP_197,38,female,162.9,61.3,operator_light,"[""spicy""]","[""spicy""]","[""fiber""]",1800,1280.125,1078.0437499999998
+EMP_198,28,male,164.4,65.4,welder,"[""pork""]",[],[],3200,1546.5,1661.2749999999999
+EMP_199,50,female,150.6,116.2,operator_light,[],[],"[""veg"", ""low_carb""]",1800,1692.25,1222.2875
+EMP_200,50,male,174.0,89.2,packer,[],[],[],1900,1734.5,1272.0749999999998
