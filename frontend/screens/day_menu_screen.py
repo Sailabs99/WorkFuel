@@ -14,6 +14,8 @@ from ui.components.top_week_bar import TopWeekBar
 from ui.components.day_panel import DayPanel
 from utils.threading_helper import run_in_thread
 
+from services.local_storage import get_avatar_path
+
 # Загружаем kv-стили
 Builder.load_file(os.path.join(os.path.dirname(__file__), "day_menu_screen.kv"))
 
@@ -28,6 +30,16 @@ class DayMenuScreen(MDScreen):
 
     def on_pre_enter(self, *args):
         self.load_or_refresh_menu()
+        self.update_avatar()
+
+    def update_avatar(self):
+        avatar_path = get_avatar_path()
+        if avatar_path:
+            self.ids.profile_avatar.source = avatar_path
+        else:
+            self.ids.profile_avatar.source = "default_avatar.png"
+        # Принудительно обновить изображение
+        self.ids.profile_avatar.reload()
 
     def load_or_refresh_menu(self):
         token = self.data_manager.load_cached_token()

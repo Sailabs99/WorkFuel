@@ -27,13 +27,25 @@
                 size_hint_x: 1
                 halign: "center"
 
-            MDFlatButton:
-                text: "Профиль"
-                theme_text_color: "Primary"
-                on_release: root.go_to_profile()
+            # Аватар профиля
+            MDRelativeLayout:
+                size_hint: None, None
+                size: dp(40), dp(40)
+
+                FitImage:
+                    id: profile_avatar
+                    source: "default_avatar.png"
+                    size_hint: 1, 1
+                    radius: [20]
+                    pos_hint: {"center_x": .5, "center_y": .5}
+
+                MDFlatButton:
+                    size_hint: 1, 1
+                    md_bg_color: 0,0,0,0
+                    on_release: root.go_to_profile()
 
         ScrollView:
-            size_hint_y: 1       # <-- важно: занимает всё доступное пространство
+            size_hint_y: 1
             BoxLayout:
                 id: content_layout
                 orientation: "vertical"

@@ -95,8 +95,11 @@ class ProfileScreen(MDScreen):
     def _on_avatar_selected(self, selection):
         if selection:
             path = selection[0]
-            save_avatar_path(path)
-            self.avatar_image.source = path
+            save_avatar_path(path)                  # копирует в локальное хранилище
+            # Устанавливаем источник на сохранённый файл
+            self.avatar_image.source = get_avatar_path()
+            # Принудительно перезагружаем изображение в виджете
+            self.avatar_image.reload()
 
     def logout(self, instance):
         dialog = MDDialog(
