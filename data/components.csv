@@ -1,0 +1,17 @@
+name,category,calories,protein,carbs,fat,tags,id,is_available_today
+Гречка отварная,garnish,130,4.5,28.0,2.0,"['veg', 'gluten_free']",1,True
+Рис белый,garnish,130,2.5,28.0,0.5,"['veg', 'gluten_free']",2,True
+Макароны,garnish,150,5.0,30.0,1.0,"['veg', 'gluten']",3,True
+Картофельное пюре,garnish,110,2.5,18.0,3.0,"['veg', 'dairy']",4,True
+Овощи гриль,garnish,70,2.0,10.0,3.0,"['veg', 'low_cal']",5,True
+Котлета куриная,protein,220,18.0,8.0,12.0,['poultry'],6,True
+Куриная грудка,protein,160,30.0,0.0,3.0,"['poultry', 'diet']",7,True
+Говядина тушеная,protein,280,25.0,2.0,20.0,"['red_meat', 'high_fat']",8,True
+Сосиски,protein,290,12.0,3.0,26.0,"['processed', 'pork']",9,True
+Рыба минтай,protein,140,22.0,0.0,4.0,"['fish', 'diet']",10,True
+Печень говяжья,protein,130,20.0,3.0,4.0,"['red_meat', 'iron']",11,True
+Салат капустный,side,40,1.0,5.0,2.0,"['veg', 'fiber']",12,True
+Винегрет,side,80,1.5,9.0,4.0,['veg'],13,True
+Компот ягодный,drink,60,0.2,15.0,0.0,"['sweet', 'fruit']",14,True
+Чай черный,drink,0,0.0,0.0,0.0,"['hot', 'caffeine']",15,True
+Кефир 2.5%,drink,50,3.0,4.0,2.5,"['dairy', 'probiotic']",16,True
