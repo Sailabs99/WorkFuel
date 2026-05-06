@@ -6,7 +6,7 @@ from datetime import date, timedelta
 import json
 from contextlib import asynccontextmanager
 from passlib.context import CryptContext
-
+from collections import defaultdict
 from database import engine, create_db_and_tables, get_session
 from models import Employee, Dish, UserWeeklyMenu, UserDailyDish
 from schemas import WeeklyMenu, DayMenu, Dish as DishSchema, AuthRequest, AuthResponse, EmployeeProfile
@@ -65,6 +65,49 @@ def login(request: AuthRequest, session: Session = Depends(get_session)):
         )
     )
 
+
+def generate_smart_summary(dishes_list, user):
+    """
+    Считает сумму КБЖУ и генерирует объяснение выбора.
+    """
+    if not dishes_list:
+        return "Выходной день"
+
+    total_cal = sum(d.calories for d in dishes_list)
+    total_prot = sum(d.proteins for d in dishes_list)
+    total_fat = sum(d.fats for d in dishes_list)
+    total_carb = sum(d.carbs for d in dishes_list)
+
+    # Формируем строку с цифрами
+    stats = f"Ккал: {total_cal} | Б: {total_prot:.1f}г | Ж: {total_fat:.1f}г | У: {total_carb:.1f}г"
+    
+    # Логика "Почему выбрано"
+    reasons = []
+    
+    # 1. Проверка калорийности (сравниваем с целью сотрудника)
+    target = user.meal_target_kcal if user.meal_target_kcal else 800
+    if 0.9 * target <= total_cal <= 1.1 * target:
+        reasons.append("Оптимально по калориям")
+    elif total_cal < 600:
+        reasons.append("Легкий прием пищи")
+    else:
+        reasons.append("Сытный обед")
+
+    # 2. Проверка белка (важно для заводов)
+    if user.kcal_per_shift and user.kcal_per_shift > 2500 and total_prot > 25:
+        reasons.append("Высокий белок для тяжелой смены")
+    elif total_prot > 20:
+        reasons.append("Достаточный белок")
+
+    # 3. Проверка баланса жиров (вредно > 40г за раз)
+    if total_fat > 40:
+        reasons.append("Повышенная жирность")
+    
+    reason_text = " | ".join(reasons) if reasons else "Сбалансированный рацион"
+    
+    return f"{stats} | {reason_text}"
+
+
 # --- Меню ---
 @app.get("/menu/weekly", response_model=WeeklyMenu)
 def get_weekly_menu(
@@ -72,17 +115,16 @@ def get_weekly_menu(
     session: Session = Depends(get_session)
 ):
     token = credentials.credentials
-    
     try:
         payload = jwt.decode(token, "secret-key", algorithms=["HS256"])
         username = payload.get("sub")
     except JWTError:
         raise HTTPException(status_code=401, detail="Invalid token")
-    
+
     user = session.exec(select(Employee).where(Employee.username == username)).first()
     if not user:
         raise HTTPException(status_code=404, detail="User not found")
-    
+
     today = date.today()
     start_of_week = today - timedelta(days=today.weekday())
     weekdays_ru = ["Понедельник", "Вторник", "Среда", "Четверг", "Пятница", "Суббота", "Воскресенье"]
@@ -96,6 +138,7 @@ def get_weekly_menu(
     weekly_days = []
 
     if saved_menu:
+        # Если меню уже есть в кэше
         for day_idx in range(7):
             dishes_stmt = select(UserDailyDish).where(
                 UserDailyDish.weekly_menu_id == saved_menu.id,
@@ -106,31 +149,24 @@ def get_weekly_menu(
             dishes_list = []
             for item in day_items:
                 d = item.dish
-                # Исправлено: проверяем тип tags перед использованием
-                if isinstance(d.tags, str):
-                    allergens = json.loads(d.tags)
-                elif isinstance(d.tags, list):
-                    allergens = d.tags
-                else:
-                    allergens = []
-                    
+                # Парсинг тегов
+                allergens = d.tags if isinstance(d.tags, list) else json.loads(d.tags) if d.tags else []
+                
                 dishes_list.append(DishSchema(
-                    dish_id=d.dish_id,
-                    name=d.name,
-                    category=d.category,
-                    calories=d.calories,
-                    proteins=d.proteins,
-                    fats=d.fats,
-                    carbs=d.carbs,
+                    dish_id=d.dish_id, name=d.name, category=d.category,
+                    calories=d.calories, proteins=d.proteins, fats=d.fats, carbs=d.carbs,
                     allergens=allergens
                 ))
+            
+            # 🔴 ВЫЗЫВАЕМ НАШУ НОВУЮ ФУНКЦИЮ ЗДЕСЬ
+            summary_text = generate_smart_summary(dishes_list, user)
             
             weekly_days.append(DayMenu(
                 date=start_of_week + timedelta(days=day_idx),
                 weekday=weekdays_ru[day_idx],
                 is_weekend=(day_idx >= 5),
                 dishes=dishes_list,
-                summary="Рекомендовано ИИ (из кэша)"
+                summary=summary_text 
             ))
     else:
         all_dishes = session.exec(select(Dish)).all()
@@ -142,55 +178,74 @@ def get_weekly_menu(
         
         scored_dishes.sort(key=lambda x: x[1], reverse=True)
 
+        # Группируем по категориям
+        by_category = {"garnish": [], "protein": [], "side": [], "drink": []}
+        for dish, score in scored_dishes:
+            if dish.category in by_category:
+                by_category[dish.category].append((dish, score))
+
+        # Сортируем каждую категорию
+        for cat in by_category:
+            by_category[cat].sort(key=lambda x: x[1], reverse=True)
+
         new_weekly_menu = UserWeeklyMenu(employee_id=user.id, start_date=start_of_week)
         session.add(new_weekly_menu)
         session.flush()
 
-        chunk_size = 5
-        current_index = 0
+        required_cats = ["garnish", "protein", "side", "drink"]
 
         for day_idx in range(7):
-            is_weekend = (day_idx >= 5)
+            is_weekend = day_idx >= 5
             dishes_for_day = []
 
             if not is_weekend:
-                chunk = scored_dishes[current_index : current_index + chunk_size]
-                current_index += chunk_size
-                
-                for dish, score in chunk:
+                for cat in required_cats:
+                    cat_list = by_category.get(cat, [])
+                    if not cat_list:
+                        continue
+                    
+                    # ЧЕРЕДУЕМ блюда по дням: день 0 -> блюдо 0, день 1 -> блюдо 1, и т.д.
+                    # Если блюд меньше чем дней, используем modulo для повторения
+                    selected_idx = day_idx % len(cat_list)
+                    selected_dish, selected_score = cat_list[selected_idx]
+                    
                     link = UserDailyDish(
                         weekly_menu_id=new_weekly_menu.id,
                         day_index=day_idx,
-                        dish_id=dish.id,
-                        relevance_score=score
+                        dish_id=selected_dish.id,
+                        relevance_score=selected_score
                     )
                     session.add(link)
                     
-                    # Исправлено: проверяем тип tags
-                    if isinstance(dish.tags, str):
-                        allergens = json.loads(dish.tags)
-                    elif isinstance(dish.tags, list):
-                        allergens = dish.tags
+                    if isinstance(selected_dish.tags, str):
+                        allergens = json.loads(selected_dish.tags)
+                    elif isinstance(selected_dish.tags, list):
+                        allergens = selected_dish.tags
                     else:
                         allergens = []
                     
                     dishes_for_day.append(DishSchema(
-                        dish_id=dish.dish_id,
-                        name=dish.name,
-                        category=dish.category,
-                        calories=dish.calories,
-                        proteins=dish.proteins,
-                        fats=dish.fats,
-                        carbs=dish.carbs,
+                        dish_id=selected_dish.dish_id,
+                        name=selected_dish.name,
+                        category=selected_dish.category,
+                        calories=selected_dish.calories,
+                        proteins=selected_dish.proteins,
+                        fats=selected_dish.fats,
+                        carbs=selected_dish.carbs,
                         allergens=allergens
                     ))
-            
+                
+                # Генерируем summary с КБЖУ
+                summary_text = generate_smart_summary(dishes_for_day, user)
+            else:
+                summary_text = "Выходной день"
+
             weekly_days.append(DayMenu(
                 date=start_of_week + timedelta(days=day_idx),
                 weekday=weekdays_ru[day_idx],
                 is_weekend=is_weekend,
                 dishes=dishes_for_day,
-                summary="Сгенерировано ИИ и сохранено"
+                summary=summary_text
             ))
         
         session.commit()
