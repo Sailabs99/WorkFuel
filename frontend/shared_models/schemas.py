@@ -43,5 +43,3 @@ class AuthResponse(BaseModel):
     token: str                       # JWT
     profile: EmployeeProfile
 
-
-from pydantic import BaseModel

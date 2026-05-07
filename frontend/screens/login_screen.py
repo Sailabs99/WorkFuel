@@ -42,17 +42,23 @@ class LoginScreen(MDScreen):
     def login(self):
         username = self.ids.employee_id.text.strip()
         password = self.ids.password.text.strip()
-        # ... весь существующий код метода
+
 
         if not username or not password:
             show_snackbar('Введите логин и пароль')
             return
 
+        print("LOGIN METHOD CALLED")
+
         def on_success(profile):
-            show_snackbar(f'Добро пожаловать, {profile.full_name.split()[0]}!')
-            Clock.schedule_once(lambda dt: setattr(self.manager, 'current', 'day_menu'), 0.5)
+            if profile is None:
+                self.data_manager.logout()
+                show_snackbar('Сессия устарела, войдите заново')
+            else:
+                self.manager.current = 'day_menu'
 
         def on_error(error_msg):
+            print("ОШИБКА ВХОДА:", error_msg)
             show_snackbar(f'Ошибка: {error_msg}')
 
         @run_in_thread(on_success, on_error)

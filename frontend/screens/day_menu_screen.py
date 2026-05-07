@@ -39,7 +39,7 @@ class DayMenuScreen(MDScreen):
         else:
             self.ids.profile_avatar.source = "default_avatar.png"
         # Принудительно обновить изображение
-        self.ids.profile_avatar.reload()
+
 
     def load_or_refresh_menu(self):
         token = self.data_manager.load_cached_token()

@@ -29,10 +29,7 @@ class DataManager:
         return storage.load_token()
 
     def get_weekly_menu(self, token: str) -> WeeklyMenu:
-        # Всегда загружаем свежее меню с сервера
-        return self.refresh_menu(token)
-
-        # Иначе загружаем
+        """Всегда загружаем свежее меню с сервера."""
         return self.refresh_menu(token)
 
     def refresh_menu(self, token: str) -> WeeklyMenu:

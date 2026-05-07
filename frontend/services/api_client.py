@@ -10,10 +10,14 @@ from config import API_BASE_URL
 class ApiClient:
     def login(self, username: str, password: str) -> AuthResponse:
         url = f"{API_BASE_URL}/auth/login"
-        payload = AuthRequest(username=username, password=password).model_dump()
+        auth_req = AuthRequest(username=username, password=password)
+        payload = auth_req.model_dump() if hasattr(auth_req, 'model_dump') else auth_req.dict()
         try:
             resp = requests.post(url, json=payload, timeout=10)
             resp.raise_for_status()
+            print("Отправка запроса на", url)
+            print("Статус ответа:", resp.status_code)
+            print("Тело ответа:", resp.text)
             return AuthResponse(**resp.json())
         except requests.RequestException as e:
             raise ConnectionError(f"Ошибка связи с сервером: {e}")

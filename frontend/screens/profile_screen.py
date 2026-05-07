@@ -14,7 +14,6 @@ from kivymd.uix.fitimage import FitImage
 from kivymd.uix.list import MDList, OneLineListItem
 from kivymd.uix.dialog import MDDialog
 from kivy.clock import Clock
-from plyer import filechooser
 
 from services.data_manager import DataManager
 from services.local_storage import get_avatar_path, save_avatar_path
@@ -84,13 +83,8 @@ class ProfileScreen(MDScreen):
         content.add_widget(logout_btn)
 
     def change_avatar(self, instance):
-        try:
-            filechooser.open_file(title="Выберите аватар",
-                                  filters=["*.png", "*.jpg", "*.jpeg"],
-                                  on_selection=self._on_avatar_selected)
-        except Exception as e:
-            MDDialog(title="Ошибка", text=f"Ошибка открытия файлов: {str(e)}",
-                     auto_dismiss=True).open()
+        from kivymd.uix.dialog import MDDialog
+        MDDialog(title="Инфо", text="Смена фото будет доступна позже").open()
 
     def _on_avatar_selected(self, selection):
         if selection:
