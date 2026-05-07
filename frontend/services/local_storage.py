@@ -86,3 +86,9 @@ def save_avatar_path(path: str):
 
 def get_avatar_path() -> str:
     return AVATAR_FILE if os.path.exists(AVATAR_FILE) else ""
+
+
+def delete_menu():
+    if os.path.exists(MENU_FILE):
+        os.remove(MENU_FILE)
+

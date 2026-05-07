@@ -29,31 +29,17 @@ class DataManager:
         return storage.load_token()
 
     def get_weekly_menu(self, token: str) -> WeeklyMenu:
-        """
-        Возвращает меню. Если кэш актуален, использует его,
-        иначе загружает с API и обновляет кэш.
-        """
-        # Проверяем кэш
-        cached_menu = storage.load_menu()
-        if cached_menu:
-            # Проверка актуальности: меню должно быть на текущую неделю.
-            # Поскольку мок-данные генерируются на текущий понедельник,
-            # то простая проверка: последний_день_недели >= сегодня.
-            # Упростим: если меню сохранено, считаем его актуальным
-            # (обновление раз в неделю по требованию).
-            # Но для демонстрации можно вернуть кэш.
-            return cached_menu
+        # Всегда загружаем свежее меню с сервера
+        return self.refresh_menu(token)
 
         # Иначе загружаем
         return self.refresh_menu(token)
 
     def refresh_menu(self, token: str) -> WeeklyMenu:
-        """Принудительная загрузка меню с сервера и кэширование."""
-        menu = self.api.fetch_weekly_menu(token)
-        storage.save_menu(menu)
-        return menu
+        """Принудительная загрузка меню с сервера (без сохранения в локальный кэш)."""
+        return self.api.fetch_weekly_menu(token)
 
     def logout(self):
         storage.delete_token()
         storage.delete_profile()
-        # Меню можно не удалять, чтобы в офлайне показывать
+        storage.delete_menu()

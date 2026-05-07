@@ -5,3 +5,12 @@ pydantic==2.13.3
 pydantic_core==2.46.3
 plyer
 hupper==1.12.1
+fastapi
+uvicorn[standard]
+sqlmodel
+pandas
+pydantic
+python-jose[cryptography]
+passlib[bcrypt]
+joblib
+scikit-learn
