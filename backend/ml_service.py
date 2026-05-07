@@ -28,9 +28,9 @@ def calculate_features(user, dish):
         "kcal_per_shift": user.kcal_per_shift,
         "meal_target_kcal": user.meal_target_kcal,
         "calories": dish.calories,
-        "protein": dish.protein,
+        "protein": dish.proteins,  # Исправлено: proteins вместо protein
         "carbs": dish.carbs,
-        "fat": dish.fat,
+        "fat": dish.fats,  # Исправлено: fats вместо fat
     }
     
     # 2. Расчетные признаки
@@ -39,22 +39,40 @@ def calculate_features(user, dish):
     features["cal_diff_ratio"] = cal_diff / target_per_meal if target_per_meal > 0 else 0
     
     # Macro score
-    prot_ratio = dish.protein / dish.calories if dish.calories > 0 else 0
+    prot_ratio = dish.proteins / dish.calories if dish.calories > 0 else 0  # Исправлено: proteins
     if user.kcal_per_shift > 2500:
         features["macro_score"] = min(prot_ratio / 0.25, 1.0)
     else:
         features["macro_score"] = max(0, 1 - abs(prot_ratio - 0.15))
         
-    # 3. Теги и предпочтения
-    try:
+    # 3. Теги и предпочтения - ИСПРАВЛЕНО
+    # Проверяем тип данных перед json.loads
+    if isinstance(user.hard_exclusions, str):
         hard_exclusions = json.loads(user.hard_exclusions)
-        soft_dislikes = json.loads(user.soft_dislikes)
-        preferences = json.loads(user.preferences)
-        dish_tags = json.loads(dish.tags)
-    except:
+    elif isinstance(user.hard_exclusions, list):
+        hard_exclusions = user.hard_exclusions
+    else:
         hard_exclusions = []
+        
+    if isinstance(user.soft_dislikes, str):
+        soft_dislikes = json.loads(user.soft_dislikes)
+    elif isinstance(user.soft_dislikes, list):
+        soft_dislikes = user.soft_dislikes
+    else:
         soft_dislikes = []
+        
+    if isinstance(user.preferences, str):
+        preferences = json.loads(user.preferences)
+    elif isinstance(user.preferences, list):
+        preferences = user.preferences
+    else:
         preferences = []
+        
+    if isinstance(dish.tags, str):
+        dish_tags = json.loads(dish.tags)
+    elif isinstance(dish.tags, list):
+        dish_tags = dish.tags
+    else:
         dish_tags = []
     
     # Soft penalty
@@ -66,22 +84,14 @@ def calculate_features(user, dish):
     features["pref_bonus"] = pref_bonus
     
     # 4. One-Hot Encoding для категорий и тегов
-    # Мы проходимся по всем именам колонок, которые ожидает модель,
-    # и заполняем их значениями. Если колонка есть в feature_names, но нет в features,
-    # она получит значение 0 по умолчанию.
-    
-    # Категории
     categories = ["garnish", "protein", "side", "drink"]
     for cat in categories:
         col_name = f"cat_{cat}"
         features[col_name] = 1 if dish.category == cat else 0
         
-    # Теги (все остальные колонки, которые не являются базовыми/расчетными/категориями)
-    # Проще всего просто проверить, является ли имя колонки тегом из dish_tags
     known_keys = set(features.keys())
     for col in feature_names:
         if col not in known_keys:
-            # Предполагаем, что это тег (например, 'caffeine', 'dairy' и т.д.)
             features[col] = 1 if col in dish_tags else 0
             
     # Собираем вектор в правильном порядке
